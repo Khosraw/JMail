@@ -54,6 +54,7 @@ public class Main {
             content = value5.getText();
         }
 
+        // authentication
         String finalEmail = email;
         String finalPassword = password;
         Session session = Session.getInstance(properties, new Authenticator() {
@@ -72,6 +73,7 @@ public class Main {
 
     private static Message messageHandler(Session session, String email, String to, String subject, String content) {
         try {
+            // message properties
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(email));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));

@@ -1,8 +1,6 @@
 package me.khosraw;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.util.Properties;
 
@@ -64,26 +62,24 @@ public class Main {
             }
         });
 
-        Message message = messageHandler(session, email, to, subject, content);
+        while (true) {
+            Message message = Handlers.messageHandler(session, email, to, subject, content);
 
-        assert message != null;
-        Transport.send(message);
-        JOptionPane.showMessageDialog(null, "Email successfully sent!");
-    }
+            assert message != null;
+            Transport.send(message);
+            JOptionPane.showMessageDialog(null, "Email successfully sent!");
 
-    private static Message messageHandler(Session session, String email, String to, String subject, String content) {
-        try {
-            // message properties
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(email));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject(subject);
-            message.setText(content);
-            return message;
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            String[] options = {"Yes", "No"};
+            int option = JOptionPane.showOptionDialog(null, "Would you like to send more emails?","Continue?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+            switch (option) {
+                case 0:
+                    break;
+                case 1:
+                    System.exit(1);
+                    break;
+                default:
+                    System.out.println("Hm, looks like something went wrong! Please report this to the developer.");
+            }
         }
-        return null;
     }
 }

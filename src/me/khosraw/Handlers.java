@@ -34,6 +34,7 @@ public class Handlers {
             password = new String(passwordChar);
         } else {
             JOptionPane.showMessageDialog(null, "Looks like you exited the program. If you think this is a mistake, please report it to the developer!");
+            System.exit(2);
         }
 
         JTextField value1 = new JTextField();

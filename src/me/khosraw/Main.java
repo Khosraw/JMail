@@ -14,16 +14,18 @@ public class Main {
     public static void main(String[] args) throws MessagingException {
         Properties properties = new Properties();
 
+        Credentials CREDENTIALS = Handlers.credentialHandler();
+
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String finalEmail = Handlers.credentialHandler().email;
-        String finalPassword = Handlers.credentialHandler().password;
-        String finalTo = Handlers.credentialHandler().to;
-        String finalSubject = Handlers.credentialHandler().subject;
-        String finalContent = Handlers.credentialHandler().content;
+        String finalEmail = CREDENTIALS.email;
+        String finalPassword = CREDENTIALS.password;
+        String finalTo = CREDENTIALS.to;
+        String finalSubject = CREDENTIALS.subject;
+        String finalContent = CREDENTIALS.content;
 
         // authentication
         Session session = Session.getInstance(properties, new Authenticator() {

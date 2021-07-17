@@ -35,7 +35,7 @@ public class Credentials {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return email + "\n" + sb.toString() + "\n" + to + "\n" + subject + "\n" + content;
+        return email + "\n" + sb + "\n" + to + "\n" + subject + "\n" + content;
     }
 
     public String getEmail () {

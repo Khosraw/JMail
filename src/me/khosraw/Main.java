@@ -1,12 +1,7 @@
 package me.khosraw;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.MessagingException;
-import javax.mail.Transport;
-import javax.swing.JOptionPane;
+import javax.mail.*;
+import javax.swing.*;
 import java.util.Properties;
 
 public class Main {
@@ -15,27 +10,33 @@ public class Main {
         Properties properties = new Properties();
 
         Credentials CREDENTIALS = Handlers.credentialHandler();
+        Credentials MESSAGE = Handlers.messageInfoHandler();
 
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String finalEmail = CREDENTIALS.email;
+        String finalEmail;
         String finalPassword = CREDENTIALS.password;
-        String finalTo = CREDENTIALS.to;
-        String finalSubject = CREDENTIALS.subject;
-        String finalContent = CREDENTIALS.content;
+        String finalTo;
+        String finalSubject;
+        String finalContent;
 
         // authentication
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(finalEmail, finalPassword);
+                return new PasswordAuthentication(CREDENTIALS.email, finalPassword);
             }
         });
 
         while (true) {
+            finalEmail = CREDENTIALS.email;
+            finalTo = MESSAGE.to;
+            finalSubject = MESSAGE.subject;
+            finalContent = MESSAGE.content;
+
             Message message = Handlers.messageHandler(session, finalEmail, finalTo, finalSubject, finalContent);
 
             assert message != null;
@@ -43,9 +44,10 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Email successfully sent!");
 
             String[] options2 = {"Yes", "No"};
-            int option2 = JOptionPane.showOptionDialog(null, "Would you like to send more emails?","Continue?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options2, options2[0]);
+            int option2 = JOptionPane.showOptionDialog(null, "Would you like to send more emails?", "Continue?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options2, options2[0]);
             switch (option2) {
                 case 0:
+                    MESSAGE = Handlers.messageInfoHandler();
                     break;
                 case 1:
                     System.exit(1);

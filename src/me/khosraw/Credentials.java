@@ -11,9 +11,12 @@ public class Credentials {
     String subject;
     String content;
 
-    Credentials (String email, String password, String to, String subject, String content) {
+    Credentials (String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    Credentials (String to, String subject, String content) {
         this.to = to;
         this.subject = subject;
         this.content = content;
@@ -24,14 +27,13 @@ public class Credentials {
 
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA");
-
             messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
 
             byte[] resultByArray = messageDigest.digest();
-
             for (byte b : resultByArray) {
                 sb.append(String.format("%02x", b));
             }
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

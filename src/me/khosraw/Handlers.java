@@ -6,9 +6,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 
-public class Handlers {
+public class Handlers extends Sender {
 
-    public static Credentials credentialHandler() {
+    protected static Credentials credentialHandler() {
         String EMAIL = null;
         String PASSWORD = null;
 
@@ -38,7 +38,7 @@ public class Handlers {
         return new Credentials(EMAIL, PASSWORD);
     }
 
-    public static Credentials messageInfoHandler() {
+    protected static Credentials messageInfoHandler() {
         String TO = null;
         String SUBJECT = null;
         String CONTENT = null;
@@ -63,7 +63,7 @@ public class Handlers {
         return new Credentials(TO, SUBJECT, CONTENT);
     }
 
-    public static Message messageHandler(Session session, String email, String to, String subject, String content) {
+    protected static Message messageHandler(Session session, String email, String to, String subject, String content) {
         try {
             // message properties
             Message message = new MimeMessage(session);

@@ -5,8 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Credentials {
-    String email;
-    String password;
+    private String email;
+    private String password;
     String to;
     String subject;
     String content;
@@ -22,7 +22,7 @@ public class Credentials {
         this.content = content;
     }
 
-    public static String credentials (String email, String password, String to, String subject, String content) {
+    private static String credentials (String email, String password, String to, String subject, String content) {
         StringBuilder sb = new StringBuilder();
 
         try {
@@ -40,23 +40,11 @@ public class Credentials {
         return email + "\n" + sb + "\n" + to + "\n" + subject + "\n" + content;
     }
 
-    public String getEmail () {
+    public String getEmail() {
         return this.email;
     }
 
-    public String getPass () {
+    public String getPass() {
         return this.password;
-    }
-
-    public String getTo () {
-        return this.to;
-    }
-
-    public String getSubject () {
-        return this.subject;
-    }
-
-    public String getContent () {
-        return this.content;
     }
 }

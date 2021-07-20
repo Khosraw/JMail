@@ -1,5 +1,7 @@
 package me.khosraw;
 
+import org.jetbrains.annotations.Contract;
+
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -25,8 +27,7 @@ public class Handlers extends Sender {
         int option1 = JOptionPane.showOptionDialog(null, panel, "Credentials",
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, options1, options1[1]);
-        if (option1 == 0) // pressing OK button
-        {
+        if (option1 == 0) {
             EMAIL = email.getText();
             char[] passwordChar = pass.getPassword();
             PASSWORD = new String(passwordChar);
@@ -38,7 +39,8 @@ public class Handlers extends Sender {
         return new Credentials(EMAIL, PASSWORD);
     }
 
-    protected static Credentials messageInfoHandler() {
+    @Contract(" -> new")
+    protected static Credentials messageInfoHandler () {
         String TO = null;
         String SUBJECT = null;
         String CONTENT = null;

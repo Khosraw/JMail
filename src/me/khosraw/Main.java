@@ -5,8 +5,10 @@ import javax.mail.*;
 public class Main {
 
     public static void main(String[] args) throws MessagingException {
-        MyJFrame myFrame = new MyJFrame();
+        MyJFrame myJFrame = new MyJFrame();
 
-        Sender.sendMail();
+        MyJFrame.myJFrame(myJFrame);
+
+        // Sender.sendMail();
     }
 }

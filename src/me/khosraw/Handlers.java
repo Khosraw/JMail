@@ -7,6 +7,8 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
+import java.awt.*;
 
 public class Handlers extends Sender {
 
@@ -14,11 +16,23 @@ public class Handlers extends Sender {
         String EMAIL = null;
         String PASSWORD = null;
 
+        UIManager.put("OptionPane.background",new ColorUIResource(32, 38, 44));
+        UIManager.put("OptionPane.foreground",Color.WHITE);
+        UIManager.put("Panel.background",new ColorUIResource(32, 38, 44));
+        UIManager.put("TextField.background",new ColorUIResource(62, 68, 74));
+        UIManager.put("TextField.foreground",Color.WHITE);
+        UIManager.put("Label.foreground",Color.WHITE);
+        UIManager.put("PasswordField.foreground",Color.WHITE);
+        UIManager.put("Button.background",new ColorUIResource(62, 68, 74));
         JPanel panel = new JPanel();
+
         JLabel labelEmail = new JLabel("Enter an email:");
+        labelEmail.setForeground(Color.WHITE);
         JTextField email = new JTextField(32);
+        email.setBackground(new Color(32, 38, 44));
         JLabel labelPass = new JLabel("Enter a password:");
         JPasswordField pass = new JPasswordField(16);
+        pass.setBackground(new Color(32, 38, 44));
         panel.add(labelEmail);
         panel.add(email);
         panel.add(labelPass);
@@ -41,6 +55,11 @@ public class Handlers extends Sender {
 
     @Contract(" -> new")
     protected static Credentials messageInfoHandler () {
+        UIManager.put("OptionPane.background",new ColorUIResource(32, 38, 44));
+        UIManager.put("OptionPane.foreground",Color.WHITE);
+        UIManager.put("Panel.background",new ColorUIResource(32, 38, 44));
+        UIManager.put("Button.background",new ColorUIResource(62, 68, 74));
+
         String TO = null;
         String SUBJECT = null;
         String CONTENT = null;

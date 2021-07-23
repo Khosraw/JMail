@@ -9,6 +9,6 @@ public class Main {
 
         MyJFrame.myJFrame(myJFrame);
 
-        // Sender.sendMail();
+        Sender.sendMail();
     }
 }
